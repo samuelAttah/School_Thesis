@@ -4,7 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = express();
 const PORT = 3500 || process.env.PORT;
-const pool = require("./config/db");
+const path = require("path");
 
 app.use(cors());
 
@@ -20,6 +20,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //ROUTES
 app.use("/", require("./routes/root"));
+app.use("/register", require("./routes/api/register"));
+app.use("/projects", require("./routes/api/projects"));
+app.use("/years", require("./routes/api/years"));
 
 app.all("*", (req, res) => {
   res.status(404);
